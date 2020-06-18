@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row fullscreen">
+    <div class="col-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span class="glyphicon glyphicon-comment"></span>
+        </div>
+        <div #scrollMe class="panel-body">
+          <ul class="chat">
+            <li *ngFor="let c of messages">
+              <div class="left clearfix" *ngIf="c.name===this.name; else rightchat">
+                <div class="row">
+                  <span class="chat-img pull-left img-avatar">
+                    <img src="http://placehold.it/50/55C1E7/fff&text=ME" alt="User Avatar" class="img-circle" />
+                  </span>
+                  <div class="talk-bubble talk-bubble-left tri-right left-in col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class="talktext">
+                      <p>{{c.message}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ng-template #rightchat>
+                <div class="right clearfix">
+                  <div class="row">
+                    <span class="chat-img pull-right img-avatar-right">
+                      <img src="http://placehold.it/50/FA6F57/fff&text=U" alt="User Avatar" class="img-circle" />
+                    </span>
+                    <div class="talk-bubble talk-bubble-right tri-right right-in pull-right col-8 col-sm-8 col-md-8 col-lg-8">
+                      <div class="talktext">
+                        <div class="row">
+                          <div class="col-12">
+                            <p class="talkname">{{c.name}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <p>{{c.message}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-2">
+              <input type="text" [(ngModel)]="name" name="name" class="form-control input-sm" placeholder="Your name here..." required=""
+              />
+            </div>
+            <div class="col-md-10">
+              <div class="input-group">
+                <input id="btn-input" type="text" [(ngModel)]="message" name="message" class="form-control input-sm" placeholder="Type your message here..."
+                  required="" (keyup)="$event.keyCode == 13 && sendMessage()" />
+                <span class="input-group-btn">
+                  <button class="btn btn-warning btn-sm" id="btn-chat" (click)="sendMessage()">
+                    Send</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
